@@ -1,2 +1,2 @@
 # VisualRaj
-VisualRaj is a data visualization web application which shows tons of data of rajasthan in a super cool way
+VisualRaj is a data visualization web application which shows tons of data of rajasthan in a super cool way by using the legendary d3.js
