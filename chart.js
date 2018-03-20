@@ -38,34 +38,28 @@ var total_population = 0;
 var total_female = 0;
 var total_male = 0;
 var total_infants = 0;
-var global_dataPoints = 0;
 
 d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { // <-A
     // read in the district level data
-    d3.csv("csv/1991_2001_2011_cencus.csv", function (dist_data) {
-        d3.select("#input_year_select").on("change", function () {
+    d3.csv("csv/2011_cencus.csv", function (dist_data) {
+        d3.select("#input_year").on("input", function () {
             update_choropleth(+this.value);
         });
-        //console.log(dist_data);
         // var dist_data_sub_att = dist_data_sub.filter(function(d){
         //   return (d.district == "Attock");
         // })
         // .map(function(d){
         //   return +d.sum_kill;
         // });
-        // console.log(dist_data);
-        // console.log(dist_data);
-                
+       // console.log(dist_data);
+
         var max_total = dist_data.map(function (d) {
-//            console.log(d);
             var total = parseInt(d.person_rural) + parseInt(d.persons_urban);
             return +total;
         });
-        
-        //console.log(max_total);
         var max_total = d3.max(max_total);
-        
-        
+
+        //console.log(max_total);
         //max_total = max_total/1000000;
         // define color scale for the heat map
         var linearScale_min1 = d3.scaleLinear()
@@ -96,18 +90,18 @@ d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { //
                 });
 
         function update_choropleth(year) {
-            console.log(year);
+          //  console.log(year);
             d3.selectAll("path")
                     .attr("transform", "translate(0, 0) " + "scale(1)");
             // filtering the data based on year and district
             //console.log(dist_data);
-            // Need when filter with year
+            /* Need when filter with year
              var dist_data_sub = dist_data.filter(function (d) {
-                 return (d.year == year);
+             // return (d.iyear == year);
              })
-            
+             */
             //  remove below line
-            //dist_data_sub = dist_data;
+            dist_data_sub = dist_data;
 
             var t_male = dist_data_sub.map(function (d) {
                 var tot = parseInt(d.males_rural) + parseInt(d.males_urban);
@@ -121,41 +115,8 @@ d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { //
             })
 
             total_female = t_female.reduce((a, b) => a + b, 0);
-            total_male = t_male.reduce((a, b) => a + b, 0);
-            total_population = total_female + total_male;
-            
-            
-                var data_1991_population = dist_data.filter(function (data) {
-                //   return (data.district == district_name);
-                    return (data.year == 1991);
-               }).map(function (d) {
-                   var total = parseInt(d.person_rural) + parseInt(d.persons_urban);
-                   return +total;
-               }).reduce((a, b) => a + b, 0);
-
-                var data_2001_population = dist_data.filter(function (data) {
-                     return (data.year == 2001);
-                }).map(function (d) {
-                    var total = parseInt(d.person_rural) + parseInt(d.persons_urban);
-                    return +total;
-                }).reduce((a, b) => a + b, 0);
-                        
-                var data_2011_population = dist_data.filter(function (data) {
-                     return (data.year == 2011);
-                }).map(function (d) {
-                    var total = parseInt(d.person_rural) + parseInt(d.persons_urban);
-                    return +total;
-                }).reduce((a, b) => a + b, 0);
-                        
-                global_dataPoints = [  
-                                {label: "1991", y: (data_1991_population/1000000)},
-                                {label: "2001", y: (data_2001_population/1000000)},
-                                {label: "2011", y: (data_2011_population/1000000)}
-                                    ];
-                                    
-                console.log(global_dataPoints);
-                updateChartAccordingToDistrict(global_dataPoints);
-                 
+                    total_male = t_male.reduce((a, b) => a + b, 0);
+                    total_population = total_female + total_male;
 
             interp_text_transit("#total_population", 1000, total_population)
             interp_text_transit("#total_female", 1000, total_female)
@@ -178,12 +139,9 @@ d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { //
                         tooltip.transition()
                                 .duration(500)
                                 .style("opacity", 0);
-                        
-                               updateChartAccordingToDistrict(global_dataPoints);
-
-                    }) 
-                    .on('click', function (d, i) {
-                        
+                    })
+                    .on('click',function(d,i){
+                        updateGraph();
                     })
                     .on("mouseenter", function (d, i) {
                         //console.log("Hello");
@@ -200,44 +158,13 @@ d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { //
 
                         var district_name = d.properties.Dist_Name;
                         var district_code = d.properties.Dist_Code;
-                        var year = document.getElementById("input_year_select").value;
+                        var year = document.getElementById("input_year").value;
 
                         var rel_data = dist_data.filter(function (data) {
-                         //   return (data.district == district_name);
-                             return (data.year == year && data.district == district_name);
+                            return (data.district == district_name);
+                            // return (data.iyear == year && data.district == district_name);
                         });
-                        
-                     
-                        var data_1991_total = dist_data.filter(function (data) {
-                         //   return (data.district == district_name);
-                             return (data.year == 1991 && data.district == district_name);
-                        }).map(function (d) {
-                            var total = parseInt(d.person_rural) + parseInt(d.persons_urban);
-                            return +total;
-                        }).reduce((a, b) => a + b, 0);
-                        
-                        var data_2001_total = dist_data.filter(function (data) {
-                             return (data.year == 2001 && data.district == district_name);
-                        }).map(function (d) {
-                            var total = parseInt(d.person_rural) + parseInt(d.persons_urban);
-                            return +total;
-                        }).reduce((a, b) => a + b, 0);
-                        
-                        var data_2011_total = dist_data.filter(function (data) {
-                             return (data.year == 2011 && data.district == district_name);
-                        }).map(function (d) {
-                            var total = parseInt(d.person_rural) + parseInt(d.persons_urban);
-                            return +total;
-                        }).reduce((a, b) => a + b, 0);
-                        
-                        dataPoints = [  
-                                        {label: "1991", y: (data_1991_total/1000000)},
-                                        {label: "2001", y: (data_2001_total/1000000)},
-                                        {label: "2011", y: (data_2011_total/1000000)}
-                                    ];
-                        updateChartAccordingToDistrict(dataPoints);
-                 
-                        
+
                         var sum_total = 0;
                         var sum_male = rel_data.map(function (d) {
                             var tot = parseInt(d.males_rural) + parseInt(d.males_urban);
@@ -307,9 +234,6 @@ d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { //
                                         <span><span style="font-weight:600; color: #FFEB3B;">' + "Total: </span>" + sum_total + '</span>')
                                 .style("left", (d3.event.pageX) + "px")
                                 .style("top", (d3.event.pageY + 20) + "px");
-                        
-                        
-                     //    updateChartAccordingToDistrict(dataPointForChart);
 
                     })
                     .transition()
@@ -338,14 +262,54 @@ d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { //
                     .attr("class", "district");
             //.transition()
         }
-        update_choropleth(document.getElementById("input_year_select").value);
-        d3.select("#input_year_select").on("change", function () {
-           // alert("hello");
+        update_choropleth(document.getElementById("input_year").value);
+        d3.select("#input_year").on("input", function () {
             update_choropleth(+this.value);
         });
     })
 });
 
+var chart;
+
+window.onload = function () {
+
+    var options = {
+        animationEnabled: true,
+        title: {
+            text: "Census data between 1991,2010,2011"
+        },
+        axisX: {
+            title: "Population",
+            includeZero: false
+        },
+        axisY: {
+            title: "Population",
+            includeZero: false
+        },
+        data: [{
+                yValueFormatString: "",
+                xValueFormatString: "MMMM",
+                type: "spline",
+                dataPoints: [
+                    {x: new Date(2017, 0), y: 25060},
+                    {x: new Date(2017, 1), y: 27980},
+                    {x: new Date(2017, 2), y: 33800},
+                    {x: new Date(2017, 3), y: 49400},
+                    {x: new Date(2017, 4), y: 40260},
+                    {x: new Date(2017, 5), y: 33900},
+                    {x: new Date(2017, 6), y: 48000},
+                    {x: new Date(2017, 7), y: 31500},
+                    {x: new Date(2017, 8), y: 32300},
+                    {x: new Date(2017, 9), y: 42000},
+                    {x: new Date(2017, 10), y: 52160},
+                    {x: new Date(2017, 11), y: 49400}
+                ]
+            }]
+    };
+    chart = $("#chartContainer").CanvasJSChart(options);
+           //schart.render();	
+
+    }
 function zoomFunction() {
 
     // get the requisite params to be used in translation of paths when zoomed
@@ -356,5 +320,19 @@ function zoomFunction() {
     d3.selectAll("path")
             .attr("transform", "translate(" + panVector + ") " + "scale(" + scaleMultiplier + ")");
 }
-
+      
+      
+function updateGraph() {
+   console.log(chart);  
+    chart.options.data[0] = {}; 
+    
+    // get the requisite params to be used in translation of paths when zoomed
+    // panning params
+    var panVector = d3.event.translate;
+    // zooming params
+    var scaleMultiplier = d3.event.scale;
+    d3.selectAll("path")
+            .attr("transform", "translate(" + panVector + ") " + "scale(" + scaleMultiplier + ")");
+}
+      
       

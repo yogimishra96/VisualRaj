@@ -18,7 +18,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <title>Pakistan map</title>
+        <title>Sample map</title>
         <style id="jsbin-css">
             .whole-strip {
                 align-items: center;
@@ -410,7 +410,7 @@
                         .style("opacity", 0);
 
 
-                d3.json("topojson/pakistan_districts.topojson", function (error, topology) { // <-A
+                d3.json("topojson/sample.topojson", function (error, topology) { // <-A
                     // read in the district level data
                     d3.csv("csv/sample.csv", function (dist_data) {
                         d3.select("#input_year").on("input", function () {
@@ -450,7 +450,6 @@
                                 .style("stroke-width", 0.2)
                                 .style("fill", "#FB8C00")
                         function update_choropleth(year) {
-                            console.log(year);
                             d3.selectAll("path")
                                     .attr("transform", "translate(0, 0) " + "scale(1)");
                             svg.call(zoom);
@@ -490,7 +489,7 @@
                                     // .on("mouseover", null)
                                     // .on("mouseout", null)
                                     .on("mouseover", function (d, i) {
-                                        console.log(this);
+                                      
                                         this.parentNode.appendChild(this);//the path group is on the top with in its parent group
                                         d3.select(this).style('stroke', 'black');
                                         d3.select(this).style("stroke-width", 1.5);
@@ -538,6 +537,8 @@
                                             return (data.district == d.properties.districts);
                                         })
                                                 .map(function (data) {
+                                                console.log("linear scale"+linearScale_min1(+data.sum_kill));
+                                                console.log("log color scale"+ logColorScale(linearScale_min1(+data.sum_kill)));
                                                     return logColorScale(linearScale_min1(+data.sum_kill));
                                                 });
                                     })

@@ -12,7 +12,6 @@
         <script src="js/d3.v4.min.js"></script>
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script src="js/materialize.min.js"></script>
-        <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 
 
 
@@ -29,11 +28,10 @@
                 <a href="#" class="right">Version: 0.0.1</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li class="navitem"><i class="material-icons left">blur_on</i><a href="./bubble.php">Switch to Tourism Map</a></li>
+                    <li class="navitem"><i class="material-icons left">blur_on</i><a href="./index.html">Switch to Bubble Map</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
-                    <!--<li class="navitem"><a href="./index.html">Switch to Bubble Map</a></li>-->
-                    <li class="navitem"><a href="./bubble.php">Switch to Tourism Map</a></li>
+                    <li class="navitem"><a href="./index.html">Switch to Bubble Map</a></li>
                 </ul>
             </div>
         </nav>
@@ -55,16 +53,11 @@
 
         <div class="container topmargin">
             <div class="row align">
-                <p class="col s2">Select Year: </p>
-                <form action="#" class="col s4">
-                    <!--<p class="range-field">-->
-                    <select id="input_year_select" name="year" style="display: block !important">
-                        <option value="2011" selected="selected" >2001-2011</option>
-                        <option value="2001" >1991-2001</option>
-                        <option value="1991" >1981-1991</option>
-                    </select>
-                    <!--<input type="range" id="input_year" min="2000" max="2016" />-->
-                    <!--</p>-->
+                <p class="col s2 select">Select Year: </p>
+                <form action="#" class="col s4 bar">
+                    <p class="range-field">
+                        <input type="range" id="input_year" min="2000" max="2016" />
+                    </p>
                 </form>
                 <div class="col s6">
                     <strong><p id="year"></p></strong>
@@ -87,7 +80,7 @@
                     <span class="highTitle">Total infant's</span><br/>
                     <span id="total_infant" class="highValue"><strong>0</strong></span>
                 </div>
-
+                
             </div>
             <div class="row">
             </div>
@@ -95,17 +88,18 @@
                 <div class="mapContain col s8 animate2">
                 </div>
                 <div class="col s4 dataSumm">
-                    <div id="chartContainer" class="aGraph"></div>
+                   
                 </div>
             </div>
             <script>
-                var cur_year = document.getElementById("input_year_select").value;
+                document.getElementById("input_year").value = 2016;
                 var yearName = document.getElementById("year");
-                $('#input_year_select').on('change', function () {
-                    yearName.innerHTML = "Statistics for " + $(this).val();
-                });
-                //  var slider = document.getElementById("input_year");
-                yearName.innerHTML = "Statistics for " + cur_year;
+                var slider = document.getElementById("input_year");
+                yearName.innerHTML = "Statistics for " + document.getElementById("input_year").value;
+
+                slider.oninput = function () {
+                    yearName.innerHTML = "Statistics for " + this.value;
+                }
             </script>
             <script src="main.js"></script>
         </div>
@@ -132,63 +126,8 @@
                 </div>
             </div>
         </footer>
-        <script>
-                $(function () {
-                    var chart = new CanvasJS.Chart("chartContainer",
-                            {
-                                axisX: {
-                                    title: "Axis X with interval 10 year",
-                                    //   interval: 100,
-//                                    valueFormatString: "YYYY"
-                                },
-                                axisY: {
-                                    title: "Axis Y with interval 1 crore",
-                                    //   interval: 100,
-                                //    valueFormatString: "YYYY"
-                                },
-                                data: [
-                                    {
-                                        type: "column",
-                                        dataPoints: [
-                                            {label: "1991", y: 18.9},
-                                            {label: "2001", y: 18.9},
-                                            {label: "2011", y: 68}
-                                        ]
-                                    }
-                                ]
-                            });
-                    chart.render();
-                });
-
-                function updateChartAccordingToDistrict(dataPoints) {
-                    console.log("sdafsd");
-                    console.log(dataPoints);
-                    var chart = new CanvasJS.Chart("chartContainer", {
-                        axisX: {
-                            title: "Axis X with interval 10 year",
-                            //   interval: 100,
-                            valueFormatString: "YYYY"
-                        },
-                        axisY: {
-                            title: "Axis Y with interval 10 lakh",
-                        },
-                        data: [
-                            {
-                                type: "column",
-                                dataPoints: dataPoints
-                            }
-                        ]
-                    });
-
-                    chart.render();
-                    // Set/Replace dataPoints (array) of dataSeries
-
-                }
-
-        </script>
-
         <script async type="text/javascript" src="js/topojson.v2.min.js"></script>
-        <script async defer src="js/d3-legend.js"></script>
+        <script async defer src="js/d3-legend"></script>
         <script type="text/javascript" src="js/textAnimate.js"></script>
     </body>
 </html>
