@@ -81,11 +81,6 @@ d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { //
             }).reduce((a, b) => a + b, 0);
             // var total_tourists_count = total_tourists.);
 
-            var n_wound = data_tourism.map(function (d) {
-                return +d.nwound;
-            })
-            var sum_n_wound = n_wound.reduce((a, b) => a + b, 0);
-
             // replacing the values on the monitor
             // d3.select("#n_inc").text(sum_n_inc);
             // d3.select("#n_kill").text(sum_n_kill);
@@ -132,47 +127,18 @@ d3.json("topojson/rajasthan_districts.topojson", function (error, topology) { //
                         d3.select(this).style("stroke-width", 2);
                         d3.select(this).style("stroke-opacity", 1);
                         d3.select(this).style("fill-opacity", 0.75);
-                        d3.select("#date")
-                                .text(d3.select(this).data().map(
-                                        function (d) {
-                                            return d.iday + "-" + d.imonth + "-" + d.iyear;
-                                        }))
+                   
                         d3.select("#city")
                                 .text(d3.select(this).data().map(
                                         function (d) {
-                                            return d.city + ", " + d.provstate;
+                                            return "Development In Progress";
                                         }))
                         d3.select("#loc")
                                 .text(d3.select(this).data().map(
                                         function (d) {
-                                            return d.location ? d.location : "Not Available";
+                                            return d.location ? d.location : "Development In Progress";
                                         }))
-                        d3.select("#target")
-                                .text(d3.select(this).data().map(
-                                        function (d) {
-                                            return d.target1 ? d.target1 : "Not Available";
-                                        }))
-                        d3.select("#perp")
-                                .text(d3.select(this).data().map(
-                                        function (d) {
-                                            return d.gname ? d.gname : "Not Available";
-                                        }))
-                        d3.select("#dead")
-                                .text(d3.select(this).data().map(
-                                        function (d) {
-                                            return d.nkill ? d.nkill : "Not Available";
-                                        }))
-                        d3.select("#injured")
-                                .text(d3.select(this).data().map(
-                                        function (d) {
-                                            return d.nwound ? d.nwound : "Not Available";
-                                        }))
-                        d3.select("#src")
-                                .text(d3.select(this).data().map(
-                                        function (d) {
-                                            return d.scite1 ? d.scite1 : "Not Available";
-                                        }))
-
+                        
                         d3.select(".values").classed("display", true)
                     })
                     .on("mouseout", function () {

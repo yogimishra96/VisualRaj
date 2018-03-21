@@ -12,8 +12,7 @@
         <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script src="js/materialize.min.js"></script>
         <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-
-        <meta charset="utf-8">
+          <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="css/bubble.css" rel="stylesheet">
         <title> map</title>
@@ -25,6 +24,8 @@
         <nav>
             <div class="nav-wrapper">
                 <a href="#" class="right">Version: 0.0.1</a>
+                <a href="#" class="center-align visual-raj-heading">Visual Raj</a>
+
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li class="navitem"><i class="material-icons left">my_location</i>
@@ -58,9 +59,11 @@
                 <form action="#" class="col s4">
                     <!--<p class="range-field">-->
                     <select id="input_year_select" name="year" style="display: block !important">
-                        <option value="2011" selected="selected" >2001-2011</option>
-                        <option value="2001" >1991-2001</option>
-                        <option value="1991" >1981-1991</option>
+                        <option value="2011" selected="selected" >2018</option>
+                        <option value="2011" selected="selected" >2017</option>
+                        <option value="2011" selected="selected" >2016</option>
+                        <option value="2011" selected="selected" >2015</option>
+                      
                     </select>
                     <!--<input type="range" id="input_year" min="2000" max="2016" />-->
                     <!--</p>-->
@@ -88,7 +91,9 @@
                 </div>
             </div>
 
-
+            <div>
+                <a href="index.php" style="color: red ;margin-right: 10px ;text-align:center" >This Page is in Progress Click here to go main page</a>
+            </div>
             <div class="row">
                 <div class="mapContain col s8 animate2">
                 </div>
@@ -97,37 +102,20 @@
                         <h4>Summary</h4>
                     </div>
                     <div class="col s12 boxInfo">
-                        <strong><span>Date: </span></strong><span id="date">12/12/2012</span>
-                    </div>
-                    <div class="col s12 boxInfo">
                         <strong><span>City: </span></strong><span id="city">Peshawar/KPK</span>
                     </div>
                     <div class="col s12 boxInfo">
                         <strong><span>Location: </span></strong><span id="loc">Location</span>
                     </div>
-                    <div class="col s12 boxInfo">
-                        <strong><span>Target: </span></strong><span id="target">Target</span>
-                    </div>
-                    <div class="col s12 boxInfo">
-                        <strong><span>Perpetrator: </span></strong><span id="perp">Perpetrator</span>
-                    </div>
-                    <div class="col s12 boxInfo">
-                        <strong><span>Reported Casualties: </span></strong><span id="dead">512</span>
-                    </div>
-                    <div class="col s12 boxInfo">
-                        <strong><span>Reported Wounded: </span></strong><span id="injured">345</span>
-                    </div>
-                    <div class="col s12 boxInfo last">
-                        <strong><span>Source: </span></strong><span id="src">DAWN</span>
-                    </div>
+                    
                 </div>
             </div>
 
             <script>
-                document.getElementById("input_year").value = 2016;
+                document.getElementById("input_year_select").value = 2018;
                 var yearName = document.getElementById("year");
-                var slider = document.getElementById("input_year");
-                yearName.innerHTML = document.getElementById("input_year").value;
+                var slider = document.getElementById("input_year_select");
+                yearName.innerHTML = document.getElementById("input_year_select").value;
 
                 slider.oninput = function () {
                     yearName.innerHTML = this.value;
@@ -138,17 +126,11 @@
         </div>
         <footer class="page-footer">
             <div class="container">
-                <div class="row">
-                    <div class="col l12 s12">
-                        <h5 class="white-text">Note</h5>
-                        <span class="Note">
-                            This is rajasthan's data visual Repersantation  about census,crime,crop and branch wise. 
-                        </span>
-                    </div>
-                    <div class="col l4 offset-l2 s12">
+                <div class="row"> 
+                    <div class="col 12 s12">
                         <h5 class="white-text">Contact Us</h5>
                         <span class="Note">
-                            Rajasthan Hackathon
+                            WSB Tech Nerds
                         </span>
                     </div>
                 </div>
@@ -159,6 +141,8 @@
                 </div>
             </div>
         </footer>
+        
+        
         <script async type="text/javascript" src="js/topojson.v2.min.js"></script>
         <script async defer src="js/d3-legend.js"></script>
         <script type="text/javascript" src="js/textAnimate.js"></script>

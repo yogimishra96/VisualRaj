@@ -19,7 +19,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <title>Rajasthan map</title>
+        <title>Visual Raj</title>
 
         <link href="css/style.css" type="text/css" rel="stylesheet">
     </head>
@@ -27,6 +27,7 @@
         <nav>
             <div class="nav-wrapper">
                 <a href="#" class="right">Version: 0.0.1</a>
+                <a href="#" class="center-align visual-raj-heading">Visual Raj</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li class="navitem"><i class="material-icons left">blur_on</i><a href="./bubble.php">Switch to Tourism Map</a></li>
@@ -111,17 +112,11 @@
         </div>
         <footer class="page-footer">
             <div class="container">
-                <div class="row">
-                    <div class="col l12 s12">
-                        <h5 class="white-text">Note</h5>
-                        <span class="Note">
-                            This is rajasthan's data visual Repersantation  about census,crime,crop and branch wise. 
-                        </span>
-                    </div>
-                    <div class="col l4 offset-l2 s12">
+                <div class="row"> 
+                    <div class="col 12 s12">
                         <h5 class="white-text">Contact Us</h5>
                         <span class="Note">
-                            Rajasthan Hackathon
+                            WSB Tech Nerds
                         </span>
                     </div>
                 </div>
