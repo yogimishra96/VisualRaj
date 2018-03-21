@@ -5,6 +5,13 @@ path {
     fill: none;
 }
 
+.visual-raj-heading{
+margin-right:  13px;
+margin-left: 388px;
+font-size:  31px;
+font-weight:  BOLD;    
+}
+
 .axis {
     shape-rendering: crispEdges;
 }

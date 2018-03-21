@@ -24,6 +24,13 @@ svg {
     fill-opacity: 0.99;
 }
 
+.visual-raj-heading{
+margin-right:  13px;
+margin-left: 388px;
+font-size:  31px;
+font-weight:  BOLD;    
+}
+
 html, body {
     font-family: 'Roboto', sans-serif;
     will-change: transform;
