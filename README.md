@@ -48,4 +48,15 @@ This is the Url of Visual Raj data visualisation Platform
 
 https://visualraj.000webhostapp.com/
 
+Installation :-
+---------------
+
+just clone the project in your /var/www/html (ubuntu) 
+                               c:/xampp/htdocs (windows) directory
+hit the url in browser 
+
+http://localhost/VisualRaj/index.php
+
+and you are done !
+                               
 
